@@ -1,7 +1,12 @@
 package com.nhnacademy.edu.springframework.project.repository;
 
+import com.nhnacademy.edu.springframework.project.domain.WaterRate;
+import java.util.Map;
+
 public interface DataParser {
-    void parse();
+    void parse(String path);
 
     boolean isEmptyFile(String path);
+
+    Map<Integer, WaterRate> getParsingDataList();
 }
