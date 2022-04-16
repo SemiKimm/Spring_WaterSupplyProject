@@ -1,4 +1,4 @@
-package repository;
+package com.nhnacademy.edu.springframework.project.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -7,10 +7,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.nhnacademy.edu.springframework.project.domain.WaterRate;
-import com.nhnacademy.edu.springframework.project.repository.BasicTariff;
-import com.nhnacademy.edu.springframework.project.repository.CsvDataParser;
-import com.nhnacademy.edu.springframework.project.repository.DataParser;
-import com.nhnacademy.edu.springframework.project.repository.Tariff;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

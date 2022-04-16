@@ -1,11 +1,9 @@
-package repository;
+package com.nhnacademy.edu.springframework.project.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import com.nhnacademy.edu.springframework.project.repository.CsvDataParser;
-import com.nhnacademy.edu.springframework.project.repository.DataParser;
 import com.nhnacademy.edu.springframework.project.exception.FileIsEmptyException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
