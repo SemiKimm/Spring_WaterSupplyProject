@@ -17,14 +17,17 @@ public class Main {
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
             SpringConfig.class)) {
             context.getBean("basicTariff", Tariff.class).load(PATH);
-            System.out.print(">");
+            WaterBillService waterBillService =
+                context.getBean("basicWaterBillService", WaterBillService.class);
+            ReportService reportService =
+                context.getBean("basicReportService", ReportService.class);
+
+            System.out.print("> ");
             while (scanner.hasNext()) {
                 long consumption = scanner.nextLong();
-                List<WaterBill> data =
-                    context.getBean("basicWaterBillService", WaterBillService.class)
-                        .calculateWaterFee(consumption);
-                context.getBean("basicReportService", ReportService.class).report(data);
-                System.out.print(">");
+                List<WaterBill> data = waterBillService.calculateWaterFee(consumption);
+                reportService.report(data);
+                System.out.print("> ");
             }
         }
     }
