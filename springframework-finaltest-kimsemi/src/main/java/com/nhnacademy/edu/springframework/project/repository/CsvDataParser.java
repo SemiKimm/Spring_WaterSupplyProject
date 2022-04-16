@@ -23,14 +23,11 @@ public class CsvDataParser implements DataParser {
         }
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(
             Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(path))))) {
+            fileReader.readLine();
             String l;
-            int count = 0;
             while ((l = fileReader.readLine()) != null) {
-                if(count==0){
-                    count++;
-                    continue;
-                }
-                String[] data = l.split(",");
+
+                String[] data = l.split("\\s*,\\s*");
                 parsingDataList.put(Integer.parseInt(data[0]),new WaterRate(Integer.parseInt(data[0]), data[1], data[2],
                     Integer.parseInt(data[6])));
             }

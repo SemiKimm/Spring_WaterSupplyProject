@@ -59,7 +59,6 @@ public class DataParserTest {
         String path = "./Tariff_20220331.csv";
         dataParser.parse(path);
         Map<Integer,WaterRate> result = dataParser.getParsingDataList();
-        log.info(result);
         assertThat(result.get(number).equals(waterRate)).isTrue();
     }
 }
