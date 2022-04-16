@@ -25,12 +25,11 @@ public class CsvDataParser implements DataParser {
         if (isEmptyFile(path)) {
             throw new FileIsEmptyException("file is empty");
         }
-        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(
+        try (var fileReader = new BufferedReader(new InputStreamReader(
             Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(path))))) {
             String l = fileReader.readLine();
             while ((l = fileReader.readLine()) != null) {
-
-                String[] data = l.split("\\s*,\\s*");
+                String[] data = l.replaceAll("\\s","").split(",");
                 parsingDataList.put(Integer.parseInt(data[0]),
                     new WaterRate(Integer.parseInt(data[0]), data[1], data[2],
                         Integer.parseInt(data[3]), Integer.parseInt(data[4]),
@@ -44,13 +43,13 @@ public class CsvDataParser implements DataParser {
 
     @Override
     public boolean isEmptyFile(String path) {
-        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(
+        try (var fileReader = new BufferedReader(new InputStreamReader(
             Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(path))))) {
-            if (fileReader.lines().count() == 0) {
+            if (fileReader.lines().findAny().isEmpty()) {
                 return true;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
         return false;
     }
