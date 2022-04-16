@@ -12,6 +12,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
+/**
+ * CsvDataParser 입니다.
+ */
 @Component
 public class CsvDataParser implements DataParser {
     private final Log log = LogFactory.getLog(CsvDataParser.class);
@@ -24,13 +27,14 @@ public class CsvDataParser implements DataParser {
         }
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(
             Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(path))))) {
-            fileReader.readLine();
-            String l;
+            String l = fileReader.readLine();
             while ((l = fileReader.readLine()) != null) {
 
                 String[] data = l.split("\\s*,\\s*");
-                parsingDataList.put(Integer.parseInt(data[0]),new WaterRate(Integer.parseInt(data[0]), data[1], data[2],
-                    Integer.parseInt(data[3]), Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6])));
+                parsingDataList.put(Integer.parseInt(data[0]),
+                    new WaterRate(Integer.parseInt(data[0]), data[1], data[2],
+                        Integer.parseInt(data[3]), Integer.parseInt(data[4]),
+                        Integer.parseInt(data[5]), Integer.parseInt(data[6])));
             }
         } catch (IOException e) {
             log.error(e.getMessage());

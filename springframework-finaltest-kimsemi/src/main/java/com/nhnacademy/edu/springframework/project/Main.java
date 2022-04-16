@@ -9,10 +9,16 @@ import java.util.List;
 import java.util.Scanner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+/**
+ * Main.
+ */
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String PATH = "./Tariff_20220331.csv";
 
+    /**
+     * ..
+     */
     public static void main(String[] args) {
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
             SpringConfig.class)) {

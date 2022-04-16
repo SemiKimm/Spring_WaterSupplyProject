@@ -7,13 +7,17 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+/**
+ * 기본_결과리포트 입니다.
+ */
 @Component
 public class BasicReportService implements ReportService {
     private final Log log = LogFactory.getLog(BasicReportService.class);
+
     @Override
     public void report(@NonNull List<WaterBill> data) {
         int dataSize = data.size();
-        if(dataSize>=5){
+        if (dataSize >= 5) {
             for (int i = 0; i < 5; i++) {
                 log.info(data.get(i).toString());
             }

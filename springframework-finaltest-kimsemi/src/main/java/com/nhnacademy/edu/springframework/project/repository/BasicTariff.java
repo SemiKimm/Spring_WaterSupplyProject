@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
+/**
+ * 기본_요금표저장소 입니다.
+ */
 @Repository
 public class BasicTariff implements Tariff {
     private final DataParser parser;
@@ -33,7 +36,7 @@ public class BasicTariff implements Tariff {
             .filter(waterRate ->
                 waterRate.getUnitStart() <= consumption && waterRate.getUnitEnd() >= consumption
             )
-            .sorted((rate1,rate2)-> (int) (rate1.getUnitPrice()-rate2.getUnitPrice()))
+            .sorted((rate1, rate2) -> (int) (rate1.getUnitPrice() - rate2.getUnitPrice()))
             .collect(Collectors.toList());
         return result;
     }

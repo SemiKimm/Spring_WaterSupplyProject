@@ -8,6 +8,9 @@ import java.util.List;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+/**
+ * 기본_상수도사용요금서비스 입니다.
+ */
 @Service
 public class BasicWaterBillService implements WaterBillService {
     private final Tariff basicTariff;
@@ -21,8 +24,10 @@ public class BasicWaterBillService implements WaterBillService {
         List<WaterBill> waterBillList = new ArrayList<>();
         List<WaterRate> waterRateList = basicTariff.findTariffByConsumption(consumption);
         waterRateList.forEach(waterRate -> {
-            long billTotal = waterRate.getUnitPrice()*consumption;
-            waterBillList.add(new WaterBill(waterRate.getCity(), waterRate.getSector(), waterRate.getUnitPrice(), billTotal));
+            long billTotal = waterRate.getUnitPrice() * consumption;
+            waterBillList.add(
+                new WaterBill(waterRate.getCity(), waterRate.getSector(), waterRate.getUnitPrice(),
+                    billTotal));
         });
         return waterBillList;
     }
