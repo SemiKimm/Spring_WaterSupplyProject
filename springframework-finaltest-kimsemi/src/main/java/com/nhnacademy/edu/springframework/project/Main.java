@@ -20,17 +20,17 @@ public class Main {
      * ..
      */
     public static void main(String[] args) {
-        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+        try (var context = new AnnotationConfigApplicationContext(
             SpringConfig.class)) {
             context.getBean("basicTariff", Tariff.class).load(PATH);
-            WaterBillService waterBillService =
+            var waterBillService =
                 context.getBean("basicWaterBillService", WaterBillService.class);
-            ReportService reportService =
+            var reportService =
                 context.getBean("basicReportService", ReportService.class);
 
             System.out.print("> ");
             while (scanner.hasNext()) {
-                long consumption = scanner.nextLong();
+                var consumption = scanner.nextLong();
                 List<WaterBill> data = waterBillService.calculateWaterFee(consumption);
                 reportService.report(data);
                 System.out.print("> ");
