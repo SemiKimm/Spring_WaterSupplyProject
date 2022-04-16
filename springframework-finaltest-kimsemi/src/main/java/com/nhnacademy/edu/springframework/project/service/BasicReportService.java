@@ -10,8 +10,8 @@ public class BasicReportService implements ReportService {
     private final Log log = LogFactory.getLog(BasicReportService.class);
     @Override
     public void report(@NonNull List<WaterBill> data) {
-        data.forEach(waterBill -> {
-            log.info(waterBill.toString());
-        });
+        for (int i = 0; i < 5; i++) {
+            log.info(data.get(i).toString());
+        }
     }
 }
