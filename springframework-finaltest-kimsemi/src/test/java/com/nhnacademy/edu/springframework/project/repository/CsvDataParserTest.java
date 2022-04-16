@@ -8,7 +8,7 @@ import com.nhnacademy.edu.springframework.project.exception.FileIsEmptyException
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class DataParserTest {
+public class CsvDataParserTest {
     private DataParser dataParser;
 
     @BeforeEach
