@@ -26,6 +26,7 @@ public class WaterBillServiceTest {
     @Test
     void calculateWaterFee() {
         long consumption = 1_000L;
+        WaterBill waterBill = new WaterBill("동두천시", "가정용", 1_530L, 1_530_000L);
         List<WaterRate> waterRateList = givenMockReturn();
         when(basicTariff.findTariffByConsumption(consumption)).thenReturn(waterRateList);
 
@@ -35,6 +36,7 @@ public class WaterBillServiceTest {
         assertThat(result.stream().findFirst().get().getBillTotal())
             .isNotZero()
             .isEqualTo(waterRateList.stream().findFirst().get().getUnitPrice()*consumption);
+        assertThat(result.stream().findFirst().get().equals(waterBill)).isTrue();
     }
 
     List<WaterRate> givenMockReturn(){
