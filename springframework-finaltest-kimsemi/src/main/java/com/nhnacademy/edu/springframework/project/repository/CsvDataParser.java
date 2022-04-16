@@ -10,15 +10,15 @@ import java.util.Map;
 import java.util.Objects;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
+@Component
 public class CsvDataParser implements DataParser {
-    private final Map<Integer, WaterRate> parsingDataList = new HashMap<>();
     private final Log log = LogFactory.getLog(CsvDataParser.class);
 
     @Override
-    public void parse(String path) {
+    public Map<Integer, WaterRate> parse(String path) {
+        Map<Integer, WaterRate> parsingDataList = new HashMap<>();
         if (isEmptyFile(path)) {
             throw new FileIsEmptyException("file is empty");
         }
@@ -35,6 +35,7 @@ public class CsvDataParser implements DataParser {
         } catch (IOException e) {
             log.error(e.getMessage());
         }
+        return parsingDataList;
     }
 
     @Override
@@ -48,10 +49,5 @@ public class CsvDataParser implements DataParser {
             e.printStackTrace();
         }
         return false;
-    }
-
-    @Override
-    public Map<Integer, WaterRate> getParsingDataList() {
-        return this.parsingDataList;
     }
 }

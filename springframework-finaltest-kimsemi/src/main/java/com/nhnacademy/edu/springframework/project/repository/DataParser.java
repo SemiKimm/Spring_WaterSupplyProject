@@ -4,9 +4,7 @@ import com.nhnacademy.edu.springframework.project.domain.WaterRate;
 import java.util.Map;
 
 public interface DataParser {
-    void parse(String path);
+    Map<Integer, WaterRate> parse(String path);
 
     boolean isEmptyFile(String path);
-
-    Map<Integer, WaterRate> getParsingDataList();
 }
