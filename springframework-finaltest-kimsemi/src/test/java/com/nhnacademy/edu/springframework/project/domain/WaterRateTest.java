@@ -36,4 +36,10 @@ class WaterRateTest {
     void getUnitEnd() {
         assertThat(waterRate.getUnitEnd()).isEqualTo(999_999L);
     }
+
+    @Test
+    void equals() {
+        WaterRate waterRate2 = new WaterRate(68,"서산시","가정용",3L,31L,999_999L,1_680L);
+        assertThat(waterRate).isEqualTo(waterRate2);
+    }
 }

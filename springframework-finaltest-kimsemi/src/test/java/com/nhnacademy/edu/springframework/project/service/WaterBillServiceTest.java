@@ -13,7 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class WaterBillServiceTest {
+class WaterBillServiceTest {
     WaterBillService waterBillService;
     Tariff basicTariff;
 
@@ -36,7 +36,7 @@ public class WaterBillServiceTest {
         assertThat(result.stream().findFirst().get().getBillTotal())
             .isNotZero()
             .isEqualTo(waterRateList.stream().findFirst().get().getUnitPrice()*consumption);
-        assertThat(result.stream().findFirst().get().equals(waterBill)).isTrue();
+        assertThat(result).contains(waterBill);
     }
 
     List<WaterRate> givenMockReturn(){

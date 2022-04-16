@@ -64,7 +64,7 @@ public class WaterRate {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        WaterRate waterRate = (WaterRate) o;
+        var waterRate = (WaterRate) o;
         return number == waterRate.number && level == waterRate.level
             && unitStart == waterRate.unitStart && unitEnd == waterRate.unitEnd
             && unitPrice == waterRate.unitPrice && Objects.equals(city, waterRate.city)
@@ -74,18 +74,5 @@ public class WaterRate {
     @Override
     public int hashCode() {
         return Objects.hash(number, city, sector, level, unitStart, unitEnd, unitPrice);
-    }
-
-    @Override
-    public String toString() {
-        return "WaterRate{"
-            + "number=" + number
-            + ", city='" + city + '\''
-            + ", sector='" + sector + '\''
-            + ", level=" + level
-            + ", unitStart=" + unitStart
-            + ", unitEnd=" + unitEnd
-            + ", unitPrice=" + unitPrice
-            + '}';
     }
 }

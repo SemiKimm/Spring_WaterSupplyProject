@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class TariffTest {
+class TariffTest {
     private Tariff tariffRepository;
     private DataParser parser;
 
@@ -26,10 +26,10 @@ public class TariffTest {
     }
 
     @Test
-    void load(){
+    void load() {
         String path = "./Tariff_20220331.csv";
         when(parser.parse(path)).thenReturn(new HashMap<>());
-        assertDoesNotThrow(()->tariffRepository.load(path));
+        assertDoesNotThrow(() -> tariffRepository.load(path));
 
         verify(parser).parse(path);
     }
@@ -41,22 +41,24 @@ public class TariffTest {
         "3, 동두천시 , 가정용 ,3,31,999999,1530"
     })
     void getAllTariff(int number, String city, String sector, long level, long unitStart,
-                            long unitEnd, long unitPrice) {
-        WaterRate waterRate = new WaterRate(number,city,sector,level,unitStart,unitEnd,unitPrice);
+                      long unitEnd, long unitPrice) {
+        WaterRate waterRate =
+            new WaterRate(number, city, sector, level, unitStart, unitEnd, unitPrice);
         String path = "./Tariff_20220331.csv";
         when(parser.parse(path)).thenReturn(getMockReturn());
         tariffRepository.load(path);
-        Map<Integer,WaterRate> result = tariffRepository.getAllTariff();
+        Map<Integer, WaterRate> result = tariffRepository.getAllTariff();
 
-        assertThat(result).isNotNull().isNotEmpty();
-        assertThat(result.get(number).equals(waterRate)).isTrue();
+        assertThat(result).isNotNull()
+            .isNotEmpty()
+            .containsEntry(number, waterRate);
     }
 
-    Map<Integer,WaterRate> getMockReturn(){
-        Map<Integer,WaterRate> result = new HashMap<>();
-        WaterRate waterRate1 = new WaterRate(1,"동두천시","가정용",1,1,20, 690);
-        WaterRate waterRate2 = new WaterRate(2,"동두천시","가정용",2,21,30, 1090);
-        WaterRate waterRate3 = new WaterRate(3,"동두천시","가정용",3,31,999999, 1530);
+    Map<Integer, WaterRate> getMockReturn() {
+        Map<Integer, WaterRate> result = new HashMap<>();
+        WaterRate waterRate1 = new WaterRate(1, "동두천시", "가정용", 1, 1, 20, 690);
+        WaterRate waterRate2 = new WaterRate(2, "동두천시", "가정용", 2, 21, 30, 1090);
+        WaterRate waterRate3 = new WaterRate(3, "동두천시", "가정용", 3, 31, 999999, 1530);
         result.put(1, waterRate1);
         result.put(2, waterRate2);
         result.put(3, waterRate3);
@@ -64,7 +66,7 @@ public class TariffTest {
     }
 
     @Test
-    void findTariffByConsumption(){
+    void findTariffByConsumption() {
         long consumption = 1_000L;
         String path = "./Tariff_20220331.csv";
 
@@ -73,9 +75,11 @@ public class TariffTest {
 
         List<WaterRate> result = tariffRepository.findTariffByConsumption(consumption);
         assertThat(result).isNotNull().isNotEmpty();
-        result.forEach(rate->{
-            assertThat(consumption>=rate.getUnitStart()&&consumption<=rate.getUnitEnd()).isTrue();
+        result.forEach(rate -> {
+            assertThat(
+                consumption >= rate.getUnitStart() && consumption <= rate.getUnitEnd()).isTrue();
         });
-        assertThat(result).isSortedAccordingTo((rate1,rate2)-> (int) (rate1.getUnitPrice()-rate2.getUnitPrice()));
+        assertThat(result).isSortedAccordingTo(
+            (rate1, rate2) -> (int) (rate1.getUnitPrice() - rate2.getUnitPrice()));
     }
 }
