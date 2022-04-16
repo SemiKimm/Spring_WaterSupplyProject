@@ -22,6 +22,14 @@ public class WaterRate {
         this.unitPrice = unitPrice;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public String getSector() {
+        return sector;
+    }
+
     public long getUnitPrice() {
         return unitPrice;
     }
