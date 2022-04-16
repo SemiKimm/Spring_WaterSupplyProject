@@ -8,4 +8,6 @@ import java.util.List;
  */
 public interface ReportService {
     void report(List<WaterBill> data);
+
+    boolean isDataSizeLack(int dataSize);
 }
