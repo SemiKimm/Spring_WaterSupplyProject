@@ -46,7 +46,7 @@ public class TariffTest {
     })
     void getAllTariff(int number, String city, String sector, long level, long unitStart,
                             long unitEnd, long unitPrice) {
-        WaterRate waterRate = new WaterRate(number,city,sector,unitPrice);
+        WaterRate waterRate = new WaterRate(number,city,sector,level,unitStart,unitEnd,unitPrice);
         String path = "./Tariff_20220331.csv";
         when(parser.parse(path)).thenReturn(getMockReturn());
         tariffRepository.load(path);
@@ -58,9 +58,9 @@ public class TariffTest {
 
     Map<Integer,WaterRate> getMockReturn(){
         Map<Integer,WaterRate> result = new HashMap<>();
-        WaterRate waterRate1 = new WaterRate(1,"동두천시","가정용",690);
-        WaterRate waterRate2 = new WaterRate(2,"동두천시","가정용",1090);
-        WaterRate waterRate3 = new WaterRate(3,"동두천시","가정용",1530);
+        WaterRate waterRate1 = new WaterRate(1,"동두천시","가정용",1,1,20, 690);
+        WaterRate waterRate2 = new WaterRate(2,"동두천시","가정용",2,21,30, 1090);
+        WaterRate waterRate3 = new WaterRate(3,"동두천시","가정용",3,31,999999, 1530);
         result.put(1, waterRate1);
         result.put(2, waterRate2);
         result.put(3, waterRate3);

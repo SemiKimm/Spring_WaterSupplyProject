@@ -8,7 +8,8 @@ public class WaterRate {
     private final String sector;
     private final long unitPrice;
 
-    public WaterRate(int number, String city, String sector, long unitPrice) {
+    public WaterRate(int number, String city, String sector, long level, long unitStart,
+                     long unitEnd, long unitPrice) {
         this.number = number;
         this.city = city;
         this.sector = sector;
