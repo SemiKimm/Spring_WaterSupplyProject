@@ -26,6 +26,14 @@ public class WaterRate {
         return unitPrice;
     }
 
+    public long getUnitStart() {
+        return unitStart;
+    }
+
+    public long getUnitEnd() {
+        return unitEnd;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

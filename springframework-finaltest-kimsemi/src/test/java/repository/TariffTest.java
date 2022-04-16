@@ -71,10 +71,15 @@ public class TariffTest {
     void findTariffByConsumption(){
         long consumption = 1_000L;
         String path = "./Tariff_20220331.csv";
+
         when(parser.parse(path)).thenReturn(getMockReturn());
         tariffRepository.load(path);
 
         List<WaterRate> result = tariffRepository.findTariffByConsumption(consumption);
         assertThat(result).isNotNull().isNotEmpty();
+        result.forEach(rate->{
+            assertThat(consumption>=rate.getUnitStart()&&consumption<=rate.getUnitEnd()).isTrue();
+        });
+        assertThat(result).isSortedAccordingTo((rate1,rate2)-> (int) (rate1.getUnitPrice()-rate2.getUnitPrice()));
     }
 }

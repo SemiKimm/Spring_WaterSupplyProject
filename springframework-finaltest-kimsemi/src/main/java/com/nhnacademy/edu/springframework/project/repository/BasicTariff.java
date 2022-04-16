@@ -4,8 +4,7 @@ import com.nhnacademy.edu.springframework.project.domain.WaterRate;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -18,7 +17,7 @@ public class BasicTariff implements Tariff {
     }
 
     @Override
-    public void load(String path) {
+    public void load(@NonNull String path) {
         tariff = parser.parse(path);
     }
 
@@ -28,10 +27,13 @@ public class BasicTariff implements Tariff {
     }
 
     @Override
-    public List<WaterRate> findTariffByConsumption(long consumption) {
+    public List<WaterRate> findTariffByConsumption(@NonNull long consumption) {
         List<WaterRate> result;
         result = tariff.values().stream()
-            .sorted((rate1, rate2)-> (int) (rate1.getUnitPrice() - rate2.getUnitPrice()))
+            .filter(waterRate ->
+                waterRate.getUnitStart() <= consumption && waterRate.getUnitEnd() >= consumption
+            )
+            .sorted((rate1,rate2)-> (int) (rate1.getUnitPrice()-rate2.getUnitPrice()))
             .collect(Collectors.toList());
         return result;
     }
