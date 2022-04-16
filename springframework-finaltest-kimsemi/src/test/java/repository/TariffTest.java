@@ -12,6 +12,7 @@ import com.nhnacademy.edu.springframework.project.repository.CsvDataParser;
 import com.nhnacademy.edu.springframework.project.repository.DataParser;
 import com.nhnacademy.edu.springframework.project.repository.Tariff;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -64,5 +65,16 @@ public class TariffTest {
         result.put(2, waterRate2);
         result.put(3, waterRate3);
         return result;
+    }
+
+    @Test
+    void findTariffByConsumption(){
+        long consumption = 1_000L;
+        String path = "./Tariff_20220331.csv";
+        when(parser.parse(path)).thenReturn(getMockReturn());
+        tariffRepository.load(path);
+
+        List<WaterRate> result = tariffRepository.findTariffByConsumption(consumption);
+        assertThat(result).isNotNull().isNotEmpty();
     }
 }

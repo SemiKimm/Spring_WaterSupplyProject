@@ -15,6 +15,10 @@ public class WaterRate {
         this.unitPrice = unitPrice;
     }
 
+    public long getUnitPrice() {
+        return unitPrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
