@@ -19,4 +19,10 @@ class WaterBillTest {
         long billTotal = 1_110_000L;
         assertThat(waterBill.getBillTotal()).isEqualTo(billTotal);
     }
+
+    @Test
+    void equals() {
+        WaterBill waterBill2 = new WaterBill("파주시","가정용",1_110L,1_110_000L);
+        assertThat(waterBill).isEqualTo(waterBill2);
+    }
 }

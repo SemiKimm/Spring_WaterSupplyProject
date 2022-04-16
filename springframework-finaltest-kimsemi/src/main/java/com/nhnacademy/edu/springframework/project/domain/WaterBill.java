@@ -38,7 +38,7 @@ public class WaterBill {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        WaterBill waterBill = (WaterBill) o;
+        var waterBill = (WaterBill) o;
         return unitPrice == waterBill.unitPrice && billTotal == waterBill.billTotal
             && Objects.equals(city, waterBill.city)
             && Objects.equals(sector, waterBill.sector);
