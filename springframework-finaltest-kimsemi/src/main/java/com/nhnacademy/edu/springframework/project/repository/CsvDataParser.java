@@ -5,13 +5,14 @@ import com.nhnacademy.edu.springframework.project.exception.FileIsEmptyException
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class CsvDataParser implements DataParser {
     private final Map<Integer, WaterRate> parsingDataList = new HashMap<>();
     private final Log log = LogFactory.getLog(CsvDataParser.class);
