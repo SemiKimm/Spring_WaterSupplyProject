@@ -29,7 +29,7 @@ public class CsvDataParser implements DataParser {
             Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(path))))) {
             String l = fileReader.readLine();
             while ((l = fileReader.readLine()) != null) {
-                String[] data = l.replaceAll("\\s","").split(",");
+                String[] data = l.replaceAll("\\s", "").split(",");
                 parsingDataList.put(Integer.parseInt(data[0]),
                     new WaterRate(Integer.parseInt(data[0]), data[1], data[2],
                         Integer.parseInt(data[3]), Integer.parseInt(data[4]),
