@@ -4,36 +4,52 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import com.nhnacademy.edu.springframework.project.domain.WaterRate;
 import com.nhnacademy.edu.springframework.project.exception.FileIsEmptyException;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CsvDataParserTest {
-    private DataParser dataParser;
+    private DataParser csvDataParser;
 
     @BeforeEach
     void setUp() {
-        dataParser = new CsvDataParser();
+        csvDataParser = new CsvDataParser();
     }
 
     @Test
     void parse() {
         String path = "./Tariff_20220331.csv";
-        assertDoesNotThrow(() -> dataParser.parse(path));
+        assertDoesNotThrow(() -> csvDataParser.parse(path));
     }
 
     @Test
     void parse_fileIsEmpty_throwFileIsEmptyException(){
         String path = "./empty.csv";
-        assertThatThrownBy(()->dataParser.parse(path))
+        assertThatThrownBy(()-> csvDataParser.parse(path))
             .isInstanceOf(FileIsEmptyException.class)
             .hasMessageContainingAll("empty");
     }
 
     @Test
-    void isEmptyFile() {
+    void parse_resultIsNotNull() {
+        String path = "./Tariff_20220331.csv";
+        Map<Integer, WaterRate> result = csvDataParser.parse(path);
+        assertThat(result).isNotNull().isNotEmpty();
+    }
+
+    @Test
+    void isEmptyFile_true() {
         String path = "./empty.csv";
-        boolean result = dataParser.isEmptyFile(path);
+        boolean result = csvDataParser.isEmptyFile(path);
         assertThat(result).isTrue();
+    }
+
+    @Test
+    void isEmptyFile_false(){
+        String path = "./Tariff_20220331.csv";
+        boolean result = csvDataParser.isEmptyFile(path);
+        assertThat(result).isFalse();
     }
 }
