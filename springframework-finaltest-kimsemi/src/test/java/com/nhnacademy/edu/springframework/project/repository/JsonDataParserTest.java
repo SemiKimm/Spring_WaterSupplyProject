@@ -10,7 +10,7 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class JsonDataParserTest {
+class JsonDataParserTest {
     DataParser jsonDataParser;
 
     @BeforeEach
@@ -20,13 +20,13 @@ public class JsonDataParserTest {
 
     @Test
     void parse() {
-        String path = "./Tariff_20220331.json";
+        String path = "data/Tariff_20220331.json";
         assertDoesNotThrow(() -> jsonDataParser.parse(path));
     }
 
     @Test
     void parse_resultIsNotNull() {
-        String path = "./Tariff_20220331.json";
+        String path = "data/Tariff_20220331.json";
         Map<Integer, WaterRate> result = jsonDataParser.parse(path);
         assertThat(result).isNotNull().isNotEmpty();
     }
@@ -48,7 +48,7 @@ public class JsonDataParserTest {
 
     @Test
     void isEmptyFile_false() {
-        String path = "./Tariff_20220331.json";
+        String path = "data/Tariff_20220331.json";
         boolean result = jsonDataParser.isEmptyFile(path);
         assertThat(result).isFalse();
     }

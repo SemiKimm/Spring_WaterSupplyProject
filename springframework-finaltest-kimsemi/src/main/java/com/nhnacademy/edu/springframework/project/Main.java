@@ -14,7 +14,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String PATH = "./Tariff_20220331.csv";
+    private static final String PATH = "data/Tariff_20220331.csv";
 
     /**
      * ..

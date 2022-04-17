@@ -20,7 +20,7 @@ public class CsvDataParserTest {
 
     @Test
     void parse() {
-        String path = "./Tariff_20220331.csv";
+        String path = "data/Tariff_20220331.csv";
         assertDoesNotThrow(() -> csvDataParser.parse(path));
     }
 
@@ -34,7 +34,7 @@ public class CsvDataParserTest {
 
     @Test
     void parse_resultIsNotNull() {
-        String path = "./Tariff_20220331.csv";
+        String path = "data/Tariff_20220331.csv";
         Map<Integer, WaterRate> result = csvDataParser.parse(path);
         assertThat(result).isNotNull().isNotEmpty();
     }
@@ -48,7 +48,7 @@ public class CsvDataParserTest {
 
     @Test
     void isEmptyFile_false(){
-        String path = "./Tariff_20220331.csv";
+        String path = "data/Tariff_20220331.csv";
         boolean result = csvDataParser.isEmptyFile(path);
         assertThat(result).isFalse();
     }

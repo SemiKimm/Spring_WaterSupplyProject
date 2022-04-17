@@ -33,7 +33,7 @@ public class CsvDataParser implements DataParser {
                 parsingDataList.put(Integer.parseInt(data[0]),
                     new WaterRate(Integer.parseInt(data[0]), data[1], data[2],
                         Integer.parseInt(data[3]), Integer.parseInt(data[4]),
-                        Integer.parseInt(data[5]), Integer.parseInt(data[6])));
+                        Integer.parseInt(data[5]), Integer.parseInt(data[6]), 0L));
             }
         } catch (IOException e) {
             log.error(e.getMessage());

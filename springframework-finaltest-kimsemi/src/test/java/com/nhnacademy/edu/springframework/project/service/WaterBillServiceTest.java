@@ -41,7 +41,7 @@ class WaterBillServiceTest {
 
     List<WaterRate> givenMockReturn(){
         List<WaterRate> result = new ArrayList<>();
-        WaterRate waterRate = new WaterRate(3,"동두천시","가정용",3,31,999999, 1530);
+        WaterRate waterRate = new WaterRate(3,"동두천시","가정용",3,31,999999, 1530, 0L);
         result.add(waterRate);
         return result;
     }

@@ -4,30 +4,40 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.edu.springframework.project.domain.WaterRate;
 import com.nhnacademy.edu.springframework.project.exception.FileIsEmptyException;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Component;
 
+/**
+ * Json 포멧의 데이터를 파싱합니다.
+ */
+@Component
 public class JsonDataParser implements DataParser {
     @Override
     public Map<Integer, WaterRate> parse(String path) {
-        Log log = LogFactory.getLog(JsonDataParser.class);
+        var log = LogFactory.getLog(JsonDataParser.class);
+        Map<Integer, WaterRate> result = new HashMap<>();
         if (isEmptyFile(path)) {
             throw new FileIsEmptyException("file is empty");
         }
-        ObjectMapper objectMapper = new ObjectMapper();
+        var objectMapper = new ObjectMapper();
         try {
-            WaterRate waterRate = objectMapper.readValue(new File(path),WaterRate.class);
-            log.info(waterRate);
+            List<WaterRate> waterRates = Arrays.asList(
+                objectMapper.readValue(getClass().getClassLoader().getResourceAsStream(path),
+                    WaterRate[].class));
+            waterRates.forEach(waterRate -> {
+                result.put(waterRate.getNumber(), waterRate);
+            });
         } catch (IOException e) {
             log.error(e.getMessage());
         }
-
-        return null;
+        return result;
     }
 
     @Override
