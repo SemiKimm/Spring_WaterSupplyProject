@@ -27,9 +27,7 @@ public class JsonDataParser implements DataParser {
             List<WaterRate> waterRates = Arrays.asList(
                 objectMapper.readValue(getClass().getClassLoader().getResourceAsStream(path),
                     WaterRate[].class));
-            waterRates.forEach(waterRate -> {
-                result.put(waterRate.getNumber(), waterRate);
-            });
+            waterRates.forEach(waterRate -> result.put(waterRate.getNumber(), waterRate));
         } catch (IOException e) {
             log.error(e.getMessage());
         }

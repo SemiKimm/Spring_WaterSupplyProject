@@ -31,7 +31,7 @@ class WaterBillTest {
     @Test
     void equals_false() {
         WaterBill test = new WaterBill("파주시","공업용",1_110L,1_110_000L);
-        assertThat(waterBill.equals(test)).isFalse();
+        assertThat(waterBill).isNotEqualTo(test);
     }
 
     @Test
