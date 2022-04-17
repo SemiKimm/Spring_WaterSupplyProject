@@ -15,7 +15,6 @@ import org.springframework.util.StopWatch;
 @Component
 public class LoggingAspect {
     private final Log log = LogFactory.getLog(LoggingAspect.class);
-
     /**
      * 메서드별 실행시간에 대한 log 를 남깁니다.
      */

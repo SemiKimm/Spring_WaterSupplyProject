@@ -7,12 +7,15 @@ import com.nhnacademy.edu.springframework.project.service.ReportService;
 import com.nhnacademy.edu.springframework.project.service.WaterBillService;
 import java.util.List;
 import java.util.Scanner;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * Main.
  */
 public class Main {
+    private static final Log log = LogFactory.getLog(Main.class);
     private static final Scanner scanner = new Scanner(System.in);
     private static final String PATH = "data/Tariff_20220331.json";
 
@@ -29,12 +32,12 @@ public class Main {
             var reportService =
                 context.getBean("basicReportService", ReportService.class);
 
-            System.out.print("> ");
+            log.info("> ");
             while (scanner.hasNext()) {
                 var consumption = scanner.nextLong();
                 List<WaterBill> data = waterBillService.calculateWaterBill(consumption);
                 reportService.report(data);
-                System.out.print("> ");
+                log.info("> ");
             }
         }
     }

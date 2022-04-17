@@ -12,9 +12,31 @@
             </pattern>
         </encoder>
     </appender>
+    <appender name="STDOUT_SHELL" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %msg
+            </pattern>
+        </encoder>
+    </appender>
+    <appender name="STDOUT_JUST_MSG" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %msg%n
+            </pattern>
+        </encoder>
+    </appender>
 
     <logger name="com.nhnacademy.edu.springframework" level="INFO" additivity="false">
         <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.nhnacademy.edu.springframework.project.Main" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT_SHELL"/>
+    </logger>
+
+    <logger name="com.nhnacademy.edu.springframework.project.service.BasicReportService" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT_JUST_MSG"/>
     </logger>
 
     <logger name="com.nhnacademy.edu.springframework.project.aspect.LoggingAspect" level="INFO" additivity="false">
