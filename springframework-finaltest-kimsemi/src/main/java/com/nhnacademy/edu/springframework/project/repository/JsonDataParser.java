@@ -3,14 +3,19 @@ package com.nhnacademy.edu.springframework.project.repository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nhnacademy.edu.springframework.project.domain.WaterRate;
 import com.nhnacademy.edu.springframework.project.exception.FileIsEmptyException;
+import com.nhnacademy.edu.springframework.project.exception.IllegalExtensionException;
 import java.io.BufferedReader;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -21,10 +26,13 @@ import org.springframework.stereotype.Component;
 @Component
 @Order(0)
 public class JsonDataParser implements DataParser {
+    private final Log log = LogFactory.getLog(JsonDataParser.class);
     @Override
     public Map<Integer, WaterRate> parse(String path) {
-        var log = LogFactory.getLog(JsonDataParser.class);
         Map<Integer, WaterRate> result = new HashMap<>();
+        if (checkInvalidExtension(path)) {
+            throw new IllegalExtensionException("file extension is not json : " + path);
+        }
         if (isEmptyFile(path)) {
             throw new FileIsEmptyException("file is empty");
         }
@@ -44,7 +52,6 @@ public class JsonDataParser implements DataParser {
 
     @Override
     public boolean isEmptyFile(String path) {
-        var log = LogFactory.getLog(JsonDataParser.class);
         try (var fileReader = new BufferedReader(
             new InputStreamReader(
                 Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(path))))) {
@@ -55,5 +62,10 @@ public class JsonDataParser implements DataParser {
             log.error(e.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public boolean checkInvalidExtension(String path) {
+        return !FilenameUtils.getExtension(String.valueOf(Path.of(path).getFileName())).equals("json");
     }
 }

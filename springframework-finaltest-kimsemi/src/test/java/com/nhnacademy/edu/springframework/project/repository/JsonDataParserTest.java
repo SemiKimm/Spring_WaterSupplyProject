@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import com.nhnacademy.edu.springframework.project.domain.WaterRate;
 import com.nhnacademy.edu.springframework.project.exception.FileIsEmptyException;
+import com.nhnacademy.edu.springframework.project.exception.IllegalExtensionException;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,6 +38,28 @@ class JsonDataParserTest {
         assertThatThrownBy(() -> jsonDataParser.parse(path))
             .isInstanceOf(FileIsEmptyException.class)
             .hasMessageContainingAll("empty");
+    }
+
+    @Test
+    void parse_fileIsNotJsonFile_throwIllegalExtensionException() {
+        String path = "data/Tariff_20220331.csv";
+        assertThatThrownBy(() -> jsonDataParser.parse(path))
+            .isInstanceOf(IllegalExtensionException.class)
+            .hasMessageContainingAll("file extension is not json");
+    }
+
+    @Test
+    void checkInvalidExtension_true() {
+        String path = "data/Tariff_20220331.csv";
+        boolean result = jsonDataParser.checkInvalidExtension(path);
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void checkInvalidExtension_false() {
+        String path = "data/Tariff_20220331.json";
+        boolean result = jsonDataParser.checkInvalidExtension(path);
+        assertThat(result).isFalse();
     }
 
     @Test

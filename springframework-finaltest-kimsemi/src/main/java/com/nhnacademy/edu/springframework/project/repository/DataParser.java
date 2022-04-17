@@ -10,4 +10,6 @@ public interface DataParser {
     Map<Integer, WaterRate> parse(String path);
 
     boolean isEmptyFile(String path);
+
+    boolean checkInvalidExtension(String path);
 }

@@ -2,12 +2,15 @@ package com.nhnacademy.edu.springframework.project.repository;
 
 import com.nhnacademy.edu.springframework.project.domain.WaterRate;
 import com.nhnacademy.edu.springframework.project.exception.FileIsEmptyException;
+import com.nhnacademy.edu.springframework.project.exception.IllegalExtensionException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.annotation.Order;
@@ -24,6 +27,9 @@ public class CsvDataParser implements DataParser {
     @Override
     public Map<Integer, WaterRate> parse(String path) {
         Map<Integer, WaterRate> parsingDataList = new HashMap<>();
+        if (checkInvalidExtension(path)) {
+            throw new IllegalExtensionException("file extension is not csv : " + path);
+        }
         if (isEmptyFile(path)) {
             throw new FileIsEmptyException("file is empty");
         }
@@ -54,5 +60,11 @@ public class CsvDataParser implements DataParser {
             log.error(e.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public boolean checkInvalidExtension(String path) {
+        return !FilenameUtils.getExtension(String.valueOf(Path.of(path).getFileName()))
+            .equals("csv");
     }
 }
