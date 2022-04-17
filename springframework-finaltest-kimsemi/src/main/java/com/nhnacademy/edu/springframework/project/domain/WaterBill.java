@@ -12,7 +12,7 @@ public class WaterBill {
     private final long billTotal;
 
     /**
-     * 다음과 같은 속성을 갖습니다.
+     * .
      *
      * @param city : 지자체명
      * @param sector : 업종

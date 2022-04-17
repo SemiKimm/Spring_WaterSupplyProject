@@ -29,7 +29,7 @@ public class WaterRate {
     }
 
     /**
-     * 다음과 같은 속성을 갖습니다.
+     * .
      *
      * @param number     : 순번
      * @param city       : 지자체명

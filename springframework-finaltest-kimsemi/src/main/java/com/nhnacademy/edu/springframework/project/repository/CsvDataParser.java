@@ -1,5 +1,6 @@
 package com.nhnacademy.edu.springframework.project.repository;
 
+import com.nhnacademy.edu.springframework.project.annotation.Csv;
 import com.nhnacademy.edu.springframework.project.domain.WaterRate;
 import com.nhnacademy.edu.springframework.project.exception.FileIsEmptyException;
 import com.nhnacademy.edu.springframework.project.exception.IllegalExtensionException;
@@ -17,10 +18,11 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * CsvDataParser 입니다.
+ * CsvDataParser.
  */
 @Component
 @Order(1)
+@Csv
 public class CsvDataParser implements DataParser {
     private final Log log = LogFactory.getLog(CsvDataParser.class);
 

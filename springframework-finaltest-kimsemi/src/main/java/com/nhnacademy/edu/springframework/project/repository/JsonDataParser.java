@@ -1,11 +1,11 @@
 package com.nhnacademy.edu.springframework.project.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nhnacademy.edu.springframework.project.annotation.Json;
 import com.nhnacademy.edu.springframework.project.domain.WaterRate;
 import com.nhnacademy.edu.springframework.project.exception.FileIsEmptyException;
 import com.nhnacademy.edu.springframework.project.exception.IllegalExtensionException;
 import java.io.BufferedReader;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
@@ -25,8 +25,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Order(0)
+@Json
 public class JsonDataParser implements DataParser {
     private final Log log = LogFactory.getLog(JsonDataParser.class);
+
     @Override
     public Map<Integer, WaterRate> parse(String path) {
         Map<Integer, WaterRate> result = new HashMap<>();
@@ -66,6 +68,7 @@ public class JsonDataParser implements DataParser {
 
     @Override
     public boolean checkInvalidExtension(String path) {
-        return !FilenameUtils.getExtension(String.valueOf(Path.of(path).getFileName())).equals("json");
+        return !FilenameUtils.getExtension(String.valueOf(Path.of(path).getFileName()))
+            .equals("json");
     }
 }

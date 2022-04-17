@@ -1,13 +1,11 @@
 package com.nhnacademy.edu.springframework.project.repository;
 
+import com.nhnacademy.edu.springframework.project.annotation.Json;
 import com.nhnacademy.edu.springframework.project.domain.WaterRate;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +19,7 @@ public class BasicTariff implements Tariff {
 
     @Override
     @Autowired
-    public void setParser(@Qualifier("jsonDataParser") DataParser parser) {
+    public void setParser(@Json DataParser parser) {
         this.parser = parser;
     }
 
