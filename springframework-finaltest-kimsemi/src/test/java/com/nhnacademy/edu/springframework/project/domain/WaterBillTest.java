@@ -29,8 +29,14 @@ class WaterBillTest {
     }
 
     @Test
-    void equals_false() {
-        WaterBill test = new WaterBill("파주시","공업용",1_110L,1_110_000L);
+    void equals_fieldIsNotEqual() {
+        WaterBill test = new WaterBill("동두천시","공업용",1_000L,1_000_000L);
+        assertThat(waterBill).isNotEqualTo(test);
+    }
+
+    @Test
+    void equals_fieldIsNotEqual_secondTest() {
+        WaterBill test = new WaterBill("동두천시","공업용",1_110L,0L);
         assertThat(waterBill).isNotEqualTo(test);
     }
 

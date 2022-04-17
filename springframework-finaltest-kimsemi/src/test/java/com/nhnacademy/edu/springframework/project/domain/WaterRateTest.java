@@ -46,8 +46,8 @@ class WaterRateTest {
     }
 
     @Test
-    void equals_false() {
-        WaterRate test = new WaterRate(66,"서산시","가정용",1L,31L,999_999L,1_680L, 0L);
+    void equals_fieldIsNotEqual() {
+        WaterRate test = new WaterRate(66,"동두천시","공업용",2L,11L,990_000L,1_000, 1L);
         assertThat(waterRate)
             .isNotEqualTo(test);
     }
