@@ -31,7 +31,7 @@ public class Main {
             System.out.print("> ");
             while (scanner.hasNext()) {
                 var consumption = scanner.nextLong();
-                List<WaterBill> data = waterBillService.calculateWaterFee(consumption);
+                List<WaterBill> data = waterBillService.calculateWaterBill(consumption);
                 reportService.report(data);
                 System.out.print("> ");
             }

@@ -24,13 +24,13 @@ class WaterBillServiceTest {
     }
 
     @Test
-    void calculateWaterFee() {
+    void calculateWaterBill() {
         long consumption = 1_000L;
         WaterBill waterBill = new WaterBill("동두천시", "가정용", 1_530L, 1_530_000L);
         List<WaterRate> waterRateList = givenMockReturn();
         when(basicTariff.findTariffByConsumption(consumption)).thenReturn(waterRateList);
 
-        List<WaterBill> result = waterBillService.calculateWaterFee(consumption);
+        List<WaterBill> result = waterBillService.calculateWaterBill(consumption);
 
         assertThat(result).isNotNull().isNotEmpty();
         assertThat(result.stream().findFirst().get().getBillTotal())

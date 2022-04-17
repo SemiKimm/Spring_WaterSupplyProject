@@ -20,7 +20,7 @@ public class BasicWaterBillService implements WaterBillService {
     }
 
     @Override
-    public List<WaterBill> calculateWaterFee(@NonNull long consumption) {
+    public List<WaterBill> calculateWaterBill(@NonNull long consumption) {
         List<WaterBill> waterBillList = new ArrayList<>();
         List<WaterRate> waterRateList = basicTariff.findTariffByConsumption(consumption);
         waterRateList.forEach(waterRate -> {

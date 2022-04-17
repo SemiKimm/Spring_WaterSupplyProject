@@ -8,5 +8,5 @@ import java.util.List;
  * 입력된 물 사용량에 대한 요금을 계산합니다.
  */
 public interface WaterBillService {
-    List<WaterBill> calculateWaterFee(long consumption);
+    List<WaterBill> calculateWaterBill(long consumption);
 }
