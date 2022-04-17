@@ -1,7 +1,6 @@
 package com.nhnacademy.edu.springframework.project.repository;
 
 import com.nhnacademy.edu.springframework.project.domain.WaterRate;
-import com.nhnacademy.edu.springframework.project.exception.FileIsEmptyException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,9 +21,7 @@ public class CsvDataParser implements DataParser {
     @Override
     public Map<Integer, WaterRate> parse(String path) {
         Map<Integer, WaterRate> parsingDataList = new HashMap<>();
-        if (isEmptyFile(path)) {
-            throw new FileIsEmptyException("file is empty");
-        }
+
         try (var fileReader = new BufferedReader(new InputStreamReader(
             Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(path))))) {
             String l = fileReader.readLine();
@@ -39,18 +36,5 @@ public class CsvDataParser implements DataParser {
             log.error(e.getMessage());
         }
         return parsingDataList;
-    }
-
-    @Override
-    public boolean isEmptyFile(String path) {
-        try (var fileReader = new BufferedReader(new InputStreamReader(
-            Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(path))))) {
-            if (fileReader.lines().findAny().isEmpty()) {
-                return true;
-            }
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
-        return false;
     }
 }

@@ -17,4 +17,6 @@ public interface Tariff {
     List<WaterRate> findTariffByConsumption(long consumption);
 
     void setParser(DataParser parser);
+
+    boolean isEmptyFile(String path);
 }

@@ -30,26 +30,4 @@ class JsonDataParserTest {
         Map<Integer, WaterRate> result = jsonDataParser.parse(path);
         assertThat(result).isNotNull().isNotEmpty();
     }
-
-    @Test
-    void parse_isEmptyFile_throwFileIsEmptyException() {
-        String path = "./empty.json";
-        assertThatThrownBy(() -> jsonDataParser.parse(path))
-            .isInstanceOf(FileIsEmptyException.class)
-            .hasMessageContainingAll("empty");
-    }
-
-    @Test
-    void isEmptyFile_true() {
-        String path = "./empty.json";
-        boolean result = jsonDataParser.isEmptyFile(path);
-        assertThat(result).isTrue();
-    }
-
-    @Test
-    void isEmptyFile_false() {
-        String path = "data/Tariff_20220331.json";
-        boolean result = jsonDataParser.isEmptyFile(path);
-        assertThat(result).isFalse();
-    }
 }

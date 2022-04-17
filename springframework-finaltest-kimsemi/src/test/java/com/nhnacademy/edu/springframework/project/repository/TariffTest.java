@@ -1,12 +1,14 @@
 package com.nhnacademy.edu.springframework.project.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.nhnacademy.edu.springframework.project.domain.WaterRate;
+import com.nhnacademy.edu.springframework.project.exception.FileIsEmptyException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,14 @@ class TariffTest {
         assertDoesNotThrow(() -> tariffRepository.load(path));
 
         verify(parser).parse(path);
+    }
+
+    @Test
+    void load_fileIsEmpty_throwFileIsEmptyException() {
+        String path = "./empty.csv";
+        assertThatThrownBy(() -> tariffRepository.load(path))
+            .isInstanceOf(FileIsEmptyException.class)
+            .hasMessageContainingAll("empty");
     }
 
     @ParameterizedTest
@@ -82,5 +92,19 @@ class TariffTest {
         });
         assertThat(result).isSortedAccordingTo(
             (rate1, rate2) -> (int) (rate1.getUnitPrice() - rate2.getUnitPrice()));
+    }
+
+    @Test
+    void isEmptyFile_true() {
+        String path = "./empty.csv";
+        boolean result = tariffRepository.isEmptyFile(path);
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void isEmptyFile_false() {
+        String path = "data/Tariff_20220331.csv";
+        boolean result = tariffRepository.isEmptyFile(path);
+        assertThat(result).isFalse();
     }
 }
