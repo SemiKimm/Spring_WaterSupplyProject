@@ -25,9 +25,6 @@ public class CsvDataParser implements DataParser {
     @Override
     public Map<Integer, WaterRate> parse(String path) {
         Map<Integer, WaterRate> parsingDataList = new HashMap<>();
-        if (checkInvalidExtension(path)) {
-            throw new IllegalExtensionException("file extension is not csv : " + path);
-        }
         if (isEmptyFile(path)) {
             throw new FileIsEmptyException("file is empty");
         }
@@ -58,11 +55,5 @@ public class CsvDataParser implements DataParser {
             log.error(e.getMessage());
         }
         return false;
-    }
-
-    @Override
-    public boolean checkInvalidExtension(String path) {
-        return !FilenameUtils.getExtension(String.valueOf(Path.of(path).getFileName()))
-            .equals("csv");
     }
 }

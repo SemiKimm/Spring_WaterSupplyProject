@@ -28,9 +28,6 @@ public class JsonDataParser implements DataParser {
     @Override
     public Map<Integer, WaterRate> parse(String path) {
         Map<Integer, WaterRate> result = new HashMap<>();
-        if (checkInvalidExtension(path)) {
-            throw new IllegalExtensionException("file extension is not json : " + path);
-        }
         if (isEmptyFile(path)) {
             throw new FileIsEmptyException("file is empty");
         }
@@ -60,11 +57,5 @@ public class JsonDataParser implements DataParser {
             log.error(e.getMessage());
         }
         return false;
-    }
-
-    @Override
-    public boolean checkInvalidExtension(String path) {
-        return !FilenameUtils.getExtension(String.valueOf(Path.of(path).getFileName()))
-            .equals("json");
     }
 }

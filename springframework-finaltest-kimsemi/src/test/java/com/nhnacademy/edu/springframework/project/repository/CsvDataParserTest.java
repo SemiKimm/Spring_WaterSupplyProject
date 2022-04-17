@@ -49,20 +49,6 @@ class CsvDataParserTest {
     }
 
     @Test
-    void checkInvalidExtension_true() {
-        String path = "data/Tariff_20220331.json";
-        boolean result = csvDataParser.checkInvalidExtension(path);
-        assertThat(result).isTrue();
-    }
-
-    @Test
-    void checkInvalidExtension_false() {
-        String path = "data/Tariff_20220331.csv";
-        boolean result = csvDataParser.checkInvalidExtension(path);
-        assertThat(result).isFalse();
-    }
-
-    @Test
     void isEmptyFile_true() {
         String path = "./empty.csv";
         boolean result = csvDataParser.isEmptyFile(path);
