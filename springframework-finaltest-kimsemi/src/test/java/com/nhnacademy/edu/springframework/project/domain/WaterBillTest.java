@@ -22,7 +22,21 @@ class WaterBillTest {
 
     @Test
     void equals() {
-        WaterBill waterBill2 = new WaterBill("파주시","가정용",1_110L,1_110_000L);
-        assertThat(waterBill).isEqualTo(waterBill2);
+        WaterBill test = new WaterBill("파주시","가정용",1_110L,1_110_000L);
+        assertThat(waterBill)
+            .isEqualTo(test)
+            .isEqualTo(waterBill);
+    }
+
+    @Test
+    void equals_false() {
+        WaterBill test = new WaterBill("파주시","공업용",1_110L,1_110_000L);
+        assertThat(waterBill.equals(test)).isFalse();
+    }
+
+    @Test
+    void equals_nullIsFalse() {
+        assertThat(waterBill)
+            .isNotEqualTo(null);
     }
 }

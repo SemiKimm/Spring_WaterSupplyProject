@@ -39,7 +39,22 @@ class WaterRateTest {
 
     @Test
     void equals() {
-        WaterRate waterRate2 = new WaterRate(68,"서산시","가정용",3L,31L,999_999L,1_680L, 0L);
-        assertThat(waterRate).isEqualTo(waterRate2);
+        WaterRate test = new WaterRate(68,"서산시","가정용",3L,31L,999_999L,1_680L, 0L);
+        assertThat(waterRate)
+            .isEqualTo(test)
+            .isEqualTo(waterRate);
+    }
+
+    @Test
+    void equals_false() {
+        WaterRate test = new WaterRate(66,"서산시","가정용",1L,31L,999_999L,1_680L, 0L);
+        assertThat(waterRate)
+            .isNotEqualTo(test);
+    }
+
+    @Test
+    void equals_nullIsFalse() {
+        assertThat(waterRate)
+            .isNotEqualTo(null);
     }
 }
