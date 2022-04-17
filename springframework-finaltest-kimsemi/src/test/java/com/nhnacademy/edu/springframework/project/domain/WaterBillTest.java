@@ -35,8 +35,22 @@ class WaterBillTest {
     }
 
     @Test
-    void equals_nullIsFalse() {
+    void equals_null() {
         assertThat(waterBill)
             .isNotEqualTo(null);
+    }
+
+    @Test
+    void equals_classIsNotEqual() {
+        WaterRate test = new WaterRate(66,"서산시","가정용",1L,31L,999_999L,1_680L, 0L);
+        assertThat(waterBill)
+            .isNotEqualTo(test);
+    }
+
+    @Test
+    void hashCode_equals() {
+        WaterBill test = new WaterBill("파주시","가정용",1_110L,1_110_000L);
+        int result = waterBill.hashCode();
+        assertThat(result).isEqualTo(test.hashCode());
     }
 }
