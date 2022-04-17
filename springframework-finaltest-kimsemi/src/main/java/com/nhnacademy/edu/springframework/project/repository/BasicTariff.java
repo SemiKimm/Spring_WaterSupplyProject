@@ -1,9 +1,11 @@
 package com.nhnacademy.edu.springframework.project.repository;
 
 import com.nhnacademy.edu.springframework.project.domain.WaterRate;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +17,7 @@ public class BasicTariff implements Tariff {
     private final DataParser parser;
     private Map<Integer, WaterRate> tariff;
 
-    public BasicTariff(DataParser parser) {
+    public BasicTariff(@Qualifier("jsonDataParser") DataParser parser) {
         this.parser = parser;
     }
 

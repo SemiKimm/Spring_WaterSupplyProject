@@ -10,12 +10,14 @@ import java.util.Map;
 import java.util.Objects;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
  * CsvDataParser 입니다.
  */
 @Component
+@Order(1)
 public class CsvDataParser implements DataParser {
     private final Log log = LogFactory.getLog(CsvDataParser.class);
 

@@ -12,12 +12,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
  * Json 포멧의 데이터를 파싱합니다.
  */
 @Component
+@Order(0)
 public class JsonDataParser implements DataParser {
     @Override
     public Map<Integer, WaterRate> parse(String path) {
