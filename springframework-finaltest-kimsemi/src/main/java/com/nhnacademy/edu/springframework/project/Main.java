@@ -26,12 +26,12 @@ public class Main {
         try (var context = new AnnotationConfigApplicationContext(
             SpringConfig.class)) {
             var dataLoadService = context.getBean("dataLoadService", LoadService.class);
-            dataLoadService.selectParserAndLoad(PATH);
             var waterBillService =
                 context.getBean("basicWaterBillService", WaterBillService.class);
             var reportService =
                 context.getBean("basicReportService", ReportService.class);
 
+            dataLoadService.selectParserAndLoad(PATH);
             log.info("> ");
             while (scanner.hasNext()) {
                 var consumption = scanner.nextLong();
