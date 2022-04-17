@@ -1,7 +1,6 @@
 package com.nhnacademy.edu.springframework.project.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nhnacademy.edu.springframework.project.annotation.Json;
 import com.nhnacademy.edu.springframework.project.domain.WaterRate;
 import com.nhnacademy.edu.springframework.project.exception.FileIsEmptyException;
 import com.nhnacademy.edu.springframework.project.exception.IllegalExtensionException;
@@ -17,15 +16,12 @@ import java.util.Objects;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
  * Json 포멧의 데이터를 파싱합니다.
  */
 @Component
-@Order(0)
-@Json
 public class JsonDataParser implements DataParser {
     private final Log log = LogFactory.getLog(JsonDataParser.class);
 
