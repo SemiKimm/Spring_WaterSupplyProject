@@ -22,7 +22,8 @@ public class Main {
     public static void main(String[] args) {
         try (var context = new AnnotationConfigApplicationContext(
             SpringConfig.class)) {
-            context.getBean("basicTariff", Tariff.class).load(PATH);
+            var basicTariff = context.getBean("basicTariff", Tariff.class);
+            basicTariff.load(PATH);
             var waterBillService =
                 context.getBean("basicWaterBillService", WaterBillService.class);
             var reportService =

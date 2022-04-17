@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
@@ -14,10 +16,12 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class BasicTariff implements Tariff {
-    private final DataParser parser;
+    private DataParser parser;
     private Map<Integer, WaterRate> tariff;
 
-    public BasicTariff(@Qualifier("jsonDataParser") DataParser parser) {
+    @Override
+    @Autowired
+    public void setParser(@Qualifier("jsonDataParser") DataParser parser) {
         this.parser = parser;
     }
 

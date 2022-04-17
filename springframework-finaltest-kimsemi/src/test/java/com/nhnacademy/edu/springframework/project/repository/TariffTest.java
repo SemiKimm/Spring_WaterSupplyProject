@@ -22,7 +22,8 @@ class TariffTest {
     @BeforeEach
     void setUp() {
         parser = mock(CsvDataParser.class);
-        tariffRepository = new BasicTariff(parser);
+        tariffRepository = new BasicTariff();
+        tariffRepository.setParser(parser);
     }
 
     @Test

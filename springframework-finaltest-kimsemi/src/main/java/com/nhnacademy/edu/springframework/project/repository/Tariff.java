@@ -15,4 +15,6 @@ public interface Tariff {
     Map<Integer, WaterRate> getAllTariff();
 
     List<WaterRate> findTariffByConsumption(long consumption);
+
+    void setParser(DataParser parser);
 }
