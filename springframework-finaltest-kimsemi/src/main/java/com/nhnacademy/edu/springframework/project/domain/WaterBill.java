@@ -8,8 +8,13 @@ import java.util.Objects;
 public class WaterBill {
     private final String city;
     private final String sector;
-    private final long unitPrice;
+    private final long unitPrice; //db 연계되게 되면 wrapper 사용하는게 좋다.
     private final long billTotal;
+    /**
+     * 의존성주입할때 (csv,json) hashmap 사용해보기
+     * @nonnull 무지성으로 쓰지 말기!
+     * 단위랑 통합 테스트 구분하자
+     */
 
     /**
      * .

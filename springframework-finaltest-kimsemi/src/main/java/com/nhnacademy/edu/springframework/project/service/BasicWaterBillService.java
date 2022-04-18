@@ -4,6 +4,7 @@ import com.nhnacademy.edu.springframework.project.domain.WaterBill;
 import com.nhnacademy.edu.springframework.project.domain.WaterRate;
 import com.nhnacademy.edu.springframework.project.repository.Tariff;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,10 @@ public class BasicWaterBillService implements WaterBillService {
     }
 
     @Override
-    public List<WaterBill> calculateWaterBill(@NonNull long consumption) {
-        List<WaterBill> waterBillList = new ArrayList<>();
+    public List<WaterBill> calculateWaterBill(long consumption) {
         List<WaterRate> waterRateList = basicTariff.findTariffByConsumption(consumption);
-        waterRateList.forEach(waterRate -> {
+        List<WaterBill> waterBillList = waterRateList.isEmpty() ? Collections.emptyList() : new ArrayList<>();
+            waterRateList.forEach(waterRate -> {
             long billTotal = waterRate.getUnitPrice() * consumption;
             waterBillList.add(
                 new WaterBill(waterRate.getCity(), waterRate.getSector(), waterRate.getUnitPrice(),

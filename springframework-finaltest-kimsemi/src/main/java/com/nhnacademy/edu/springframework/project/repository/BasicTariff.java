@@ -47,7 +47,7 @@ public class BasicTariff implements Tariff {
             .filter(waterRate ->
                 waterRate.getUnitStart() <= consumption && waterRate.getUnitEnd() >= consumption
             )
-            .sorted((rate1, rate2) -> (int) (rate1.getUnitPrice() - rate2.getUnitPrice()))
+            .sorted((rate1, rate2) -> (int) (rate1.getUnitPrice() - rate2.getUnitPrice())).limit(5)
             .collect(Collectors.toList());
         return result;
     }

@@ -16,16 +16,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 class TariffTest {
-    private Tariff tariffRepository;
-    private DataParser parser;
+    @InjectMocks
+    private Tariff tariffRepository = new BasicTariff();
+    @Mock
+    private CsvDataParser parser;
 
     @BeforeEach
     void setUp() {
-        parser = mock(CsvDataParser.class);
-        tariffRepository = new BasicTariff();
-        tariffRepository.setParser(parser);
+        MockitoAnnotations.openMocks(this);
+//        parser = mock(CsvDataParser.class);
+//        tariffRepository = new BasicTariff();
+//        tariffRepository.setParser(parser);
     }
 
     @Test
